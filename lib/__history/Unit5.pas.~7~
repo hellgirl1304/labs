@@ -1,0 +1,62 @@
+unit Unit5;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Data.Win.ADODB;
+
+type
+  TForm5 = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    DataSource1: TDataSource;
+    ADOQuery1: TADOQuery;
+    Button3: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form5: TForm5;
+
+implementation
+uses Unit15;
+{$R *.dfm}
+
+procedure TForm5.Button1Click(Sender: TObject);
+begin
+With ADOQuery1 do
+ begin
+    Parameters.Clear;
+    SQL.Clear;
+    SQL.Add('INSERT INTO bookshelf (ФИО, Город_проживания) VALUES (:ФИО, :Город_проживания)');
+    Parameters.ParamByName('ФИО').Value:= Trim(Edit1.Text);
+    Parameters.ParamByName('Город_проживания').Value:= Trim(Edit2.Text);
+    ExecSQL;
+ end;
+ With Form1.ADOQuery4 do
+ begin
+  SQL.Clear;
+  SQL.Add('select * from author');
+  Open;
+ end;
+ Close;
+end;
+
+procedure TForm5.Button2Click(Sender: TObject);
+begin
+  Form5.Close;
+  //Hide;
+  Form1.Show;
+end;
+
+end.

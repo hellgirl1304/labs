@@ -1,0 +1,22 @@
+program Project3;
+
+uses
+  Vcl.Forms,
+  Unit15 in 'Unit15.pas' {Form1},
+  Unit2 in 'Unit2.pas' {Расположение},
+  Unit3 in 'Unit3.pas' {Полка},
+  Unit4 in 'Unit4.pas' {Книга},
+  Unit5 in 'Unit5.pas' {Автор};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TРасположение, Расположение);
+  Application.CreateForm(TПолка, Полка);
+  Application.CreateForm(TКнига, Книга);
+  Application.CreateForm(TАвтор, Автор);
+  Application.Run;
+end.
